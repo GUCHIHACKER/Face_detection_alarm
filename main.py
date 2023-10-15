@@ -1,10 +1,11 @@
 import cv2
 import pygame
 import time
+import os
 
 face_cascade1 = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 audio_playing = False  
 start_time = None  
 
@@ -13,13 +14,14 @@ pygame.init()
 alarm_sound = pygame.mixer.Sound('alarm.mp3')
 
 while True:
+    time.sleep(0.1)
     ret, frame = cap.read() 
     if not ret:
         continue 
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    faces = face_cascade1.detectMultiScale(gray, 1.1, 6) # El parametro 1.1 cuanto mas grande sea el numero como maximo 1.9 detecta caras mas pequeñas.Y el aprametro 6 dice el numero de detecciones son para que de como valida la cara cuanto mas grande sea este numero menos falsos positivos pero tambien mas dificil la detecion
+    faces = face_cascade1.detectMultiScale(gray, 1.1, 6)
     
     # Check if faces are detected
     if len(faces) > 0:
@@ -30,6 +32,10 @@ while True:
             current_time = time.time()
             if current_time - start_time >= 0.5:  
                 alarm_sound.play()
+                timestamp = time.strftime("%Y_%m_%d_%H_%M")
+                output_folder = 'images_alarm' 
+                filename = os.path.join(output_folder, f"captura_{timestamp}.jpg")
+                cv2.imwrite(filename, frame)
     else:
         if audio_playing:
             alarm_sound.stop()
