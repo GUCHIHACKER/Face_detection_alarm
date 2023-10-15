@@ -5,7 +5,7 @@ import os
 
 face_cascade1 = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0) # Cambie este numero para cambiar de camara utilizada
 audio_playing = False  
 start_time = None  
 
