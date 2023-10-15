@@ -19,7 +19,7 @@ while True:
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    faces = face_cascade1.detectMultiScale(gray, 1.1, 6)
+    faces = face_cascade1.detectMultiScale(gray, 1.1, 6) # El parametro 1.1 cuanto mas grande sea el numero como maximo 1.9 detecta caras mas pequeñas.Y el aprametro 6 dice el numero de detecciones son para que de como valida la cara cuanto mas grande sea este numero menos falsos positivos pero tambien mas dificil la detecion
     
     # Check if faces are detected
     if len(faces) > 0:
