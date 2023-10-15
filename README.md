@@ -6,3 +6,4 @@ pip install pygame
 pip install opencv-python
 python main.py
 ```
+Para salir de la heramienta hay que pulsar Esc
